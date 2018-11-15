@@ -152,11 +152,17 @@ extension BrowserViewController: WKNavigationDelegate {
                 // Grab all lists that have valid rules and add/remove them as necessary
                 on.compactMap { $0.rule }.forEach(controller.add)
                 off.compactMap { $0.rule }.forEach(controller.remove)
+
                 
                 print("\n")
+
+                if off.contains(.script) {
+                    print("error")
+                }
+                
                 print("On \(on.map { $0.filename })")
                 print("Off \(off.map { $0.filename })")
-                print("\n")
+
             }
             
             decisionHandler(.allow)
