@@ -34,6 +34,9 @@ public final class Domain: NSManagedObject, CRUD {
 
     public class func getOrCreateForUrl(_ url: URL, context: NSManagedObjectContext) -> Domain {
         let domainString = url.domainURL.absoluteString
+        
+        defer { DataController.save(context: context) }
+        
         if let domain = Domain.first(where: NSPredicate(format: "url == %@", domainString), context: context) {
             return domain
         }
